@@ -6,6 +6,6 @@
     <h1>{{ post }}</h1>
 
     <div id="post-content">
-        {% comment %} Render HTML here {% endcomment %}
+        {{ post.html_content|safe }}
     </div>
 {% endblock body %}

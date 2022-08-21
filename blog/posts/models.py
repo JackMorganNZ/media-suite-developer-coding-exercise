@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.urls import reverse
+from markdown2 import Markdown
 
 
 class Post(models.Model):
@@ -11,6 +12,7 @@ class Post(models.Model):
     title = models.CharField(max_length=500)
     author = models.CharField(max_length=500)
     markdown_content = models.TextField()
+    html_content = models.TextField(default='')
 
     def __str__(self):
         """Text representation of blog post.
@@ -30,3 +32,8 @@ class Post(models.Model):
             'post_slug': self.slug
         }
         return reverse('posts:post', kwargs=kwargs)
+
+    def save(self, *args, **kwargs):
+        markdowner = Markdown()
+        self.html_content = markdowner.convert(self.markdown_content)
+        super(Post, self).save(*args, **kwargs)
