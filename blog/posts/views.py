@@ -8,3 +8,11 @@ class IndexView(generic.ListView):
     template_name = 'posts/index.html'
     context_object_name = 'posts'
     model = Post
+
+
+class PostView(generic.DetailView):
+    """View for a specific post."""
+
+    model = Post
+    template_name = 'posts/post.html'
+    slug_url_kwarg = 'post_slug'

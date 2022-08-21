@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post }}{% endblock title %}
+
+{% block body %}
+    <h1>{{ post }}</h1>
+
+    <div id="post-content">
+        {% comment %} Render HTML here {% endcomment %}
+    </div>
+{% endblock body %}
