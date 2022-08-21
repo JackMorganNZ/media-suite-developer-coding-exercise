@@ -1,3 +1,5 @@
+from django.utils.html import strip_tags
+
 STOP_WORDS = [
     "#", "##", "a", "about", "above", "after", "again", "against", "all", "am",
     "an", "and", "any", "are", "aren't", "as", "at", "be", "because", "been",
@@ -19,3 +21,18 @@ STOP_WORDS = [
     "would", "wouldn't", "you", "you'd", "you'll", "you're", "you've", "your", "yours",
     "yourself", "yourselves"
 ]
+
+
+def update_tags(post):
+    """Updates tags for a post.
+
+    - Removes all current tags.
+    - Checks for most common words.
+    - Creates new tags.
+    """
+    clean_text = strip_tags(post.html_content).lower()
+    word_counts = {}
+    for word in clean_text.split(' '):
+        clean_word = word.strip()
+        if clean_word not in STOP_WORDS:
+            word_counts[clean_word] = word_counts.get(clean_word, 0) + 1

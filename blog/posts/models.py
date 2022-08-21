@@ -3,6 +3,7 @@
 from django.db import models
 from django.urls import reverse
 from markdown2 import Markdown
+from posts.utils import update_tags
 
 
 class Post(models.Model):
@@ -36,4 +37,16 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         markdowner = Markdown()
         self.html_content = markdowner.convert(self.markdown_content)
+        update_tags(self)
         super(Post, self).save(*args, **kwargs)
+
+
+class Tag(models.Model):
+    """Model for a blog post tag."""
+
+    slug = models.SlugField(unique=True)
+    name = models.CharField(max_length=200)
+    posts = models.ManyToManyField(
+        Post,
+        related_name="tags"
+    )
