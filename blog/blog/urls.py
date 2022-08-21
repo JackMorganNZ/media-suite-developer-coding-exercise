@@ -15,11 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.shortcuts import redirect
 from blog import views
+from rest_framework import routers
+from posts.urls import router as posts_router
+
+
+router = routers.DefaultRouter()
+router.registry.extend(posts_router.registry)
 
 urlpatterns = [
     path('', views.HomeRedirectView.as_view()),
     path('admin/', admin.site.urls),
     path('posts/', include('posts.urls', namespace='posts')),
+    path('api/', include(router.urls)),
 ]

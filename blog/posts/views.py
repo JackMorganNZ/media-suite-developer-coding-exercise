@@ -1,5 +1,7 @@
 from django.views import generic
 from posts.models import Post
+from rest_framework import viewsets
+from posts.serializers import PostSerializer
 
 
 class IndexView(generic.ListView):
@@ -16,3 +18,10 @@ class PostView(generic.DetailView):
     model = Post
     template_name = 'posts/post.html'
     slug_url_kwarg = 'post_slug'
+
+
+class PostAPIViewSet(viewsets.ReadOnlyModelViewSet):
+    """API endpoint that allows questions to be viewed."""
+
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
