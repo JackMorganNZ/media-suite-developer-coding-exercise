@@ -1,4 +1,51 @@
 # Media Suite Coding Exercise
+
+This repository holds Jack Morgan's attempt at the Media Suite coding exercise.
+It was attempted on the 21st of August 2022 from 11:30 AM to 1:30 PM.
+
+## Setup
+
+Move into the `blog` directory and download the required Python dependencies:
+
+```
+cd blog/
+pip install -r requirements.txt
+```
+
+Then migrate the database to the required state:
+
+```
+python manage.py migrate
+```
+
+## Usage
+
+Load posts into the database with:
+
+```
+python manage.py loadposts
+```
+
+Run the database server with:
+
+```
+python manage.py runserver
+```
+
+## Outcome
+
+- Posts homepage (accessible at [http://localhost:8000/posts/](http://localhost:8000/posts/)).
+- Individual post pages.
+- Command for loading posts including basic error checking.
+- API for posts (accessible at [http://localhost:8000/api/posts/](http://localhost:8000/api/posts/)).
+
+To complete the task would require finishing the tag implementation, most likely using BeautifulSoup for text parsing.
+Also some CSS would be appreciated by all.
+
+---
+
+# Task description
+
 We’d like you to build a blogging platform!
 
 This is designed as a relatively simple exercise to get some code we can talk about in our technical interview. Not all developers have code that they can share with us due to IP restrictions, and this provides a common scenario across all candidates that provides some level of objective measure.
