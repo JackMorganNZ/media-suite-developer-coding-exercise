@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
-from posts.views import posts
+from django.shortcuts import redirect
+from blog import views
 
 urlpatterns = [
-    path(r'', posts, name='home'),
-    path(r'admin/', admin.site.urls),
-    path(r'posts/', include('posts.urls')),
+    path('', views.HomeRedirectView.as_view()),
+    path('admin/', admin.site.urls),
+    path('posts/', include('posts.urls', namespace='posts')),
 ]
